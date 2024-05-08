@@ -1,6 +1,2 @@
-const gcd = (a, b) => {
-  if (b === 0) {
-    return a;
-  }
-  return gcd(b, a % b);
-};
+const nthElement = (arr, n = 0) =>
+  (n > 0 ? arr.slice(n, n + 1) : arr.slice(n))[0];
