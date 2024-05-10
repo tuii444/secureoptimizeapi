@@ -1,7 +1,12 @@
-const fibonacci = (n) => {
-  const sequence = [0, 1];
-  for (let i = 2; i <= n; i++) {
-    sequence.push(sequence[i - 1] + sequence[i - 2]);
-  }
-  return sequence;
-};
+function buildTree(inorder, postorder) {
+  if (!inorder.length || !postorder.length) return null;
+  const rootVal = postorder[postorder.length - 1];
+  const root = new TreeNode(rootVal);
+  const mid = inorder.indexOf(rootVal);
+  root.left = buildTree(inorder.slice(0, mid), postorder.slice(0, mid));
+  root.right = buildTree(
+    inorder.slice(mid + 1),
+    postorder.slice(mid, postorder.length - 1),
+  );
+  return root;
+}
