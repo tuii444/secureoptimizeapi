@@ -1,34 +1,29 @@
-function solveSudoku(board) {
-  solve(board);
-  function solve(board) {
-    for (let i = 0; i < 9; i++) {
-      for (let j = 0; j < 9; j++) {
-        if (board[i][j] === ".") {
-          for (let num = 1; num <= 9; num++) {
-            const numChar = num.toString();
-            if (isValid(board, i, j, numChar)) {
-              board[i][j] = numChar;
-              if (solve(board)) return true;
-              board[i][j] = ".";
-            }
-          }
-          return false;
-        }
-      }
+const heapSort = (arr) => {
+  const heapify = (arr, n, i) => {
+    let largest = i;
+    const left = 2 * i + 1;
+    const right = 2 * i + 2;
+    if (left < n && arr[left] > arr[largest]) {
+      largest = left;
     }
-    return true;
-  }
-  function isValid(board, row, col, num) {
-    const boxRow = Math.floor(row / 3) * 3;
-    const boxCol = Math.floor(col / 3) * 3;
-    for (let i = 0; i < 9; i++) {
-      if (
-        board[row][i] === num ||
-        board[i][col] === num ||
-        board[boxRow + Math.floor(i / 3)][boxCol + (i % 3)] === num
-      )
-        return false;
+    if (right < n && arr[right] > arr[largest]) {
+      largest = right;
     }
-    return true;
+    if (largest !== i) {
+      [arr[i], arr[largest]] = [arr[largest], arr[i]];
+      heapify(arr, n, largest);
+    }
+  };
+  const buildHeap = (arr) => {
+    const n = arr.length;
+    for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+      heapify(arr, n, i);
+    }
+  };
+  buildHeap(arr);
+  for (let i = arr.length - 1; i > 0; i--) {
+    [arr[0], arr[i]] = [arr[i], arr[0]];
+    heapify(arr, i, 0);
   }
-}
+  return arr;
+};
