@@ -1,3 +1,6 @@
-const colors = ["red", "green", "blue"];
-const randomColor = colors[Math.floor(Math.random() * colors.length)];
-console.log(randomColor);
+const number = 10;
+if (number % 2 === 0) {
+  console.log("Even number");
+} else {
+  console.log("Odd number");
+}
